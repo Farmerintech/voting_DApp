@@ -4,38 +4,49 @@ let provider, signer, contract;
 
 const contractAddress = "0x82c9f44cd15Ebef06E56441B7782e7E85CF84A8f";
 // const contractABI = [ /* Paste ABI JSON here */ ];
-const btns = document.querySelectorAll("#connectBTN");
+const connectBtns = document.querySelectorAll("#connectBTN");
 const container = document.getElementById("candidateList");
 
-btns.forEach(btn => {
+connectBtns.forEach(btn => {
   btn.onclick = async function () {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     if (typeof window.ethereum === "undefined") {
-      alert("Please install MetaMask!");
+      if (isMobile) {
+        // Redirect to MetaMask install based on OS
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.location.href = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
+        } else if (/Android/i.test(navigator.userAgent)) {
+          window.location.href = "https://play.google.com/store/apps/details?id=io.metamask";
+        } else {
+          alert("Please install MetaMask!");
+        }
+      } else {
+        alert("Please install MetaMask!");
+      }
       return;
     }
 
-    // alert("Connecting to MetaMask...");
-    console.log("MetaMask is installed!");
+    if (isMobile) {
+      // Try to open MetaMask app using deep link (this may prompt user to open MetaMask)
+      window.location.href = "metamask://";
+
+      // After opening the app, you might want to wait a bit and then try connecting
+      // But since you can't be sure if user came back, just proceed to connect below
+    }
 
     try {
-      // ✅ Create provider and signer
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
 
-      console.log("Signer:", signer);
-
-      // ✅ Get wallet address
       const addr = await signer.getAddress();
       document.getElementById("walletAddress").innerText = "Connected: " + addr;
       btn.innerHTML = 'Connected &#9989;';
 
-      // ✅ Initialize contract
       contract = new ethers.Contract(contractAddress, contractABI, signer);
-
-      // ✅ Load candidates
       getCandidate();
-  container.style.display = "flex"; // show the details again
 
+      container.style.display = "flex"; // show the details again
     } catch (err) {
       console.error("Error connecting to MetaMask:", err);
       alert("Failed to connect. See console for details.");
