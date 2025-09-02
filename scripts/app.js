@@ -6,7 +6,7 @@ const contractAddress = "0x82c9f44cd15Ebef06E56441B7782e7E85CF84A8f";
 // const contractABI = [ /* Paste ABI JSON here */ ];
 const connectBtns = document.querySelectorAll("#connectBTN");
 const container = document.getElementById("candidateList");
-
+const voteBTN = document.getElementById("voteBTN");
 connectBtns.forEach(btn => {
   btn.onclick = async function () {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -44,9 +44,7 @@ connectBtns.forEach(btn => {
       btn.innerHTML = 'Connected &#9989;';
 
       contract = new ethers.Contract(contractAddress, contractABI, signer);
-      getCandidate();
 
-      container.style.display = "flex"; // show the details again
     } catch (err) {
       console.error("Error connecting to MetaMask:", err);
       alert("Failed to connect. See console for details.");
@@ -54,7 +52,17 @@ connectBtns.forEach(btn => {
   };
 });
 
+voteBTN.addEventListener("click", initVote);
+async function initVote()
+{
+  if(!contract){
+    alert("Please connect your wallet first!");
+    return;
+  }
+        container.style.display = "flex"; // show the details again
+   getCandidate();
 
+}
 async function getCandidate() {
   try {
     if (!contract) {
