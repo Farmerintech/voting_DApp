@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting DApp</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.2.0/ethers.umd.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.0/ethers.umd.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <p>Everything on-chain</p>
+            <button id="connectBTN">Connect wallet</button>
+        </nav>
+    </header>
+    <section class="hero">
+        <aside class="hero-left">
+            <p class="welcome">Welcome to web 3 Voting system</p>
+            <p class="vote">Vote for your favourite NFT of all time</p>
+            <button id="connectBTN">
+        Connect wallet and vote
+    </button>
+            <p id="walletAddress"></p>  
+
+        </aside>
+        <aside class="hero-right">
+                <img src="/assets/NFT4.jpg"/>
+                <img src="/assets/NFT5.jpg"/>
+        </aside>
+    </section>
+    
+      
+    <div id="candidateList" class=''>
+    </div>
+
+    <script src="abi.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

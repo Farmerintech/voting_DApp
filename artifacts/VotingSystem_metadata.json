@@ -22,6 +22,25 @@
 				"type": "constructor"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "voter",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "candidateId",
+						"type": "uint256"
+					}
+				],
+				"name": "VoteCast",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -69,6 +88,54 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getAllCandidates",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "username",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "votes",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct VotingSystem.CandidateInfo[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCandidateCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -99,14 +166,9 @@
 								"internalType": "uint256",
 								"name": "votes",
 								"type": "uint256"
-							},
-							{
-								"internalType": "address[]",
-								"name": "voters",
-								"type": "address[]"
 							}
 						],
-						"internalType": "struct VotingSystem.Candidate",
+						"internalType": "struct VotingSystem.CandidateInfo",
 						"name": "",
 						"type": "tuple"
 					}
@@ -181,11 +243,11 @@
 	},
 	"sources": {
 		"contracts/voting.sol": {
-			"keccak256": "0x3e038928a7ab0714e4edc27dc1405f7a3959955dcc21a5cf64ddd5cde1427257",
+			"keccak256": "0x918ed1d4d1b3e8c592dbe110036c109d0958e6f3e324a15b1bcb55eaf5c24c08",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2d3932e98eed9e834c4ee32bfd3ba61e284b45fbe75a544eff878be9271f1eb2",
-				"dweb:/ipfs/QmbCfeCJMceCZiDeiDQkQnSSN5WUpVwjGfzUvVwbYtw6L4"
+				"bzz-raw://8f5e0176c07b3894d87c4691b73cd28204f1f7e4249819270106c8db5ae84501",
+				"dweb:/ipfs/QmZQ8ya9QTqqpVAStE4MoTyKfWHEUnCYizJYvaZ3PVqrD7"
 			]
 		}
 	},

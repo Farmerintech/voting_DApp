@@ -1,0 +1,261 @@
+/* General body styles */
+body {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    background: #0d0d0d;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+/* Container styling */
+.container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    backdrop-filter: blur(12px);
+}
+
+/* Header and Navigation */
+header {
+    position: absolute;
+    top: 20px;
+    width: 90%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: #000;
+    width: 100%;
+}
+
+/* Heading with gradient animation */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #ff00cc, #3333ff, #00f0ff);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 6s infinite linear;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Buttons */
+button {
+    display: block;
+    width: 60%;
+    /* margin: 10px auto; */
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(90deg, #ff00cc, #3333ff, #00f0ff);
+    background-size: 300%;
+    cursor: pointer;
+    transition: background-position 0.5s ease-in-out, transform 0.2s ease-in-out;
+}
+
+button:hover {
+    background-position: 100% 50%;
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 120px 20px 40px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* Hero text */
+.hero-left {
+    flex: 1 1 400px;
+    padding: 20px;
+}
+
+.welcome {
+    font-weight: 700;
+    font-size: 3rem;
+    width:60%;
+    margin-bottom: 20px;
+}
+
+@media (max-width:1080px) {
+    .welcome{
+         width:100%;
+    }
+}
+
+@media (max-width:786px) {
+    .welcome{
+         width:100%;
+         font-size: 2rem;
+    }
+    .hero{
+        flex-direction: column-reverse;
+    }
+}
+
+.vote {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+.hero-right {
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-right img {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  object-fit: cover;
+  border: 4px solid rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  position: relative;
+  margin-top: -60px; /* Negative margin to stack them */
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Zigzag offset using nth-child */
+.hero-right img:nth-child(odd) {
+  transform: translateX(-20px) rotate(-2deg);
+  border-color: #ff00cc;
+  z-index: 2;
+}
+
+.hero-right img:nth-child(even) {
+  transform: translateX(20px) rotate(2deg);
+  border-color: rgba(0, 240, 255, 0.5);
+  z-index: 1;
+}
+
+.hero-right img:first-child {
+  margin-top: 0; /* First image no negative margin */
+}
+
+.hero-right img:hover {
+  transform: scale(1.05) !important;
+  z-index: 3;
+}
+header button{
+    width: 20%;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+  header button{
+    width: 50%;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+nav{
+    width:98%;
+    padding: 5px;
+}
+.hero button{
+    width: 80%;
+    padding: 12px;
+    font-size: 1rem;
+}
+}
+
+/* Container Flexbox */
+/* #candidateList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+
+} */
+
+/* Candidate Card */
+.candidate-card .card {
+  background: linear-gradient(135deg, #1e1e2f, #000);
+  border: 2px solid #ff00cc;
+  border-radius: 20px;
+  padding: 15px;
+  width: 250px;
+  box-shadow: 0 4px 20px rgba(255, 0, 204, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.candidate-card .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(255, 0, 204, 0.5);
+}
+
+/* Image Container with Animation */
+.image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.nft-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.image-container:hover .nft-image {
+  transform: scale(1.1) rotate(1deg);
+}
+
+/* Text Info */
+.info p {
+  color: #fff;
+  margin: 5px 0;
+}
+
+/* Button Styling */
+.vote-button {
+  margin-top: 10px;
+  background: #ff00cc;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.vote-button:hover {
+  background: #ff33dd;
+}
