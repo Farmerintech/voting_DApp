@@ -119,9 +119,9 @@ button:active {
          width:100%;
          font-size: 2rem;
     }
-    .hero{
+    /* .hero{
         flex-direction: column;
-    }
+    } */
 }
 
 .vote {
