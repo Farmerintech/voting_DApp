@@ -5,6 +5,7 @@ let provider, signer, contract;
 const contractAddress = "0x82c9f44cd15Ebef06E56441B7782e7E85CF84A8f";
 // const contractABI = [ /* Paste ABI JSON here */ ];
 const btns = document.querySelectorAll("#connectBTN");
+const container = document.getElementById("candidateList");
 
 btns.forEach(btn => {
   btn.onclick = async function () {
@@ -13,7 +14,7 @@ btns.forEach(btn => {
       return;
     }
 
-    alert("Connecting to MetaMask...");
+    // alert("Connecting to MetaMask...");
     console.log("MetaMask is installed!");
 
     try {
@@ -33,6 +34,7 @@ btns.forEach(btn => {
 
       // ✅ Load candidates
       getCandidate();
+  container.style.display = "block"; // show the details again
 
     } catch (err) {
       console.error("Error connecting to MetaMask:", err);
@@ -53,7 +55,6 @@ const cand = await contract.getCandidateDetails(0);
 
     const candidates = await contract.getAllCandidates();
     console.log(candidates);
-const container = document.getElementById("candidateList");
 
 // Clear previous content and classes
 container.innerHTML = "";
@@ -72,7 +73,7 @@ const closeButton = document.createElement("button");
 closeButton.textContent = "Close ✖";
 closeButton.className = "absolute top-4 right-4 text-white bg-pink-700 hover:bg-pink-800 px-4 py-2 rounded-md z-50";
 closeButton.onclick = () => {
-  container.innerHTML = "";
+  // container.innerHTML = "";
   container.style.display = "none"; // Hide container when closed
 };
 container.appendChild(closeButton);
@@ -109,5 +110,16 @@ candidates.forEach(candidate => {
 
   } catch (err) {
     console.error(err);
+  }
+}
+
+const vote = async (id) =>{
+  try {
+    const castVote = await contract.castVote(id);
+    if(!castVote){
+      
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
