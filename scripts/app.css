@@ -120,7 +120,7 @@ button:active {
          font-size: 2rem;
     }
     .hero{
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 }
 
