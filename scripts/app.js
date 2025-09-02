@@ -40,8 +40,9 @@ connectBtns.forEach(btn => {
       const signer = await provider.getSigner();
 
       const addr = await signer.getAddress();
+      const shortAddr = addr.slice(0, 6) + '...' + addr.slice(-4);
       document.getElementById("walletAddress").innerText = "Connected: " + addr;
-      btn.innerHTML = 'Connected &#9989;';
+      btn.innerHTML = "Connected: " + shortAddr
 
       contract = new ethers.Contract(contractAddress, contractABI, signer);
 
