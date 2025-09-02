@@ -34,7 +34,7 @@ btns.forEach(btn => {
 
       // ✅ Load candidates
       getCandidate();
-  container.style.display = "block"; // show the details again
+  container.style.display = "flex"; // show the details again
 
     } catch (err) {
       console.error("Error connecting to MetaMask:", err);
