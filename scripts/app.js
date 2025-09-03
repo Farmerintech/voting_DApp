@@ -7,28 +7,41 @@ const container = document.getElementById("candidateList");
 const voteBTN = document.getElementById("voteBTN");
 connectBtns.forEach(btn => {
   btn.onclick = async function () {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const dappLink = "voting-d-app-pearl.vercel.app";
 
-    if (typeof window.ethereum === "undefined") {
-      if (isMobile) {
-        // Redirect to MetaMask install based on OS
-        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-          window.location.href = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
-        } else if (/Android/i.test(navigator.userAgent)) {
-          window.location.href = "https://play.google.com/store/apps/details?id=io.metamask";
-        } else {
-          alert("Please install MetaMask!");
-        }
-      } else {
-        alert("Please install MetaMask!");
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  const isAndroid = /Android/i.test(userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+  const isMobile = isAndroid || isIOS;
+
+  if (!isMobile && typeof window.ethereum === "undefined") {
+    alert("Please install MetaMask on your mobile device on browser extension.");
+    return;
+  }
+
+  const metamaskDeepLink = `https://metamask.app.link/dapp/${dappLink}`;
+  const playStoreLink = "https://play.google.com/store/apps/details?id=io.metamask";
+  const appStoreLink = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
+
+  // Try to open MetaMask via deep link
+  const start = Date.now();
+  window.location.href = metamaskDeepLink;
+
+  // Fallback: after timeout, redirect to store if MetaMask is not installed
+  setTimeout(() => {
+    const now = Date.now();
+    // if user is still on page after 1500ms, assume MetaMask isn't installed
+    if (now - start < 2000) {
+      if (isAndroid) {
+        window.location.href = playStoreLink;
+      } else if (isIOS) {
+        window.location.href = appStoreLink;
       }
-      return;
     }
+  }, 1500);
 
-    if (isMobile) {
-      window.location.href = "https://metamask.app.link/dapp/voting-d-app-pearl.vercel.app";
 
- }
 
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
