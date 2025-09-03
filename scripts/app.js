@@ -19,7 +19,6 @@ connectBtns.forEach(btn => {
     alert("Please install MetaMask on your mobile device on browser extension.");
     return;
   }
-
   const metamaskDeepLink = `https://metamask.app.link/dapp/${dappLink}`;
   const playStoreLink = "https://play.google.com/store/apps/details?id=io.metamask";
   const appStoreLink = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
