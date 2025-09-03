@@ -7,32 +7,58 @@ const container = document.getElementById("candidateList");
 const voteBTN = document.getElementById("voteBTN");
 connectBtns.forEach(btn => {
   btn.onclick = async function () {
-    const dappLink = "voting-d-app-pearl.vercel.app";
+   const dappLink = "voting-d-app-pearl.vercel.app";
+const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+const isAndroid = /Android/i.test(userAgent);
+const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+const isMobile = isAndroid || isIOS;
 
-  const isAndroid = /Android/i.test(userAgent);
-  const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
-  const isMobile = isAndroid || isIOS;
-  const metamaskDeepLink = `https://metamask.app.link/dapp/${dappLink}`;
-  const playStoreLink = "https://play.google.com/store/apps/details?id=io.metamask";
-  const appStoreLink = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
+const metamaskDeepLink = `https://metamask.app.link/dapp/${dappLink}`;
+const playStoreLink = "https://play.google.com/store/apps/details?id=io.metamask";
+const appStoreLink = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
 
-  if (!isMobile && typeof window.ethereum === "undefined") {
-    alert("Please install MetaMask on your mobile device on browser extension.");
-     if(isAndroid) {
+// Already inside MetaMask browser? Proceed directly.
+if (window.ethereum && window.ethereum.isMetaMask) {
+  console.log("Inside MetaMask browser");
+  // Proceed with dApp logic
+} else if (isMobile) {
+  // External mobile browser — try deeplink
+  let didHide = false;
+
+  const handleVisibilityChange = () => {
+    if (document.hidden) {
+      didHide = true;
+    }
+  };
+
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+
+  window.location.href = metamaskDeepLink;
+
+  setTimeout(() => {
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
+
+    if (!didHide) {
+      // User didn't leave the page — assume MetaMask not installed
+      if (isAndroid) {
         window.location.href = playStoreLink;
-      }
-  if (isIOS) {
+      } else if (isIOS) {
         window.location.href = appStoreLink;
       }
-    return;
+    }
+  }, 2000);
+} else {
+  // Desktop user without MetaMask
+  if (typeof window.ethereum === "undefined") {
+    alert("Please install MetaMask browser extension.");
+  } else {
+    // Proceed with MetaMask extension flow
   }
- 
+}
 
   // Try to open MetaMask via deep link
   const start = Date.now();
-  window.location.href = metamaskDeepLink;
 
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
