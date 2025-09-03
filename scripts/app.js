@@ -14,6 +14,9 @@ connectBtns.forEach(btn => {
   const isAndroid = /Android/i.test(userAgent);
   const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
   const isMobile = isAndroid || isIOS;
+  const metamaskDeepLink = `https://metamask.app.link/dapp/${dappLink}`;
+  const playStoreLink = "https://play.google.com/store/apps/details?id=io.metamask";
+  const appStoreLink = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
 
   if (!isMobile && typeof window.ethereum === "undefined") {
     alert("Please install MetaMask on your mobile device on browser extension.");
@@ -26,9 +29,6 @@ connectBtns.forEach(btn => {
     return;
   }
  
-  const metamaskDeepLink = `https://metamask.app.link/dapp/${dappLink}`;
-  const playStoreLink = "https://play.google.com/store/apps/details?id=io.metamask";
-  const appStoreLink = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
 
   // Try to open MetaMask via deep link
   const start = Date.now();
