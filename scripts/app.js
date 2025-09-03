@@ -7,58 +7,41 @@ const container = document.getElementById("candidateList");
 const voteBTN = document.getElementById("voteBTN");
 connectBtns.forEach(btn => {
   btn.onclick = async function () {
-   const dappLink = "voting-d-app-pearl.vercel.app";
-const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const dappLink = "voting-d-app-pearl.vercel.app";
 
-const isAndroid = /Android/i.test(userAgent);
-const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
-const isMobile = isAndroid || isIOS;
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-const metamaskDeepLink = `https://metamask.app.link/dapp/${dappLink}`;
-const playStoreLink = "https://play.google.com/store/apps/details?id=io.metamask";
-const appStoreLink = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
+  const isAndroid = /Android/i.test(userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+  const isMobile = isAndroid || isIOS;
 
-// Already inside MetaMask browser? Proceed directly.
-if (window.ethereum && window.ethereum.isMetaMask) {
-  console.log("Inside MetaMask browser");
-  // Proceed with dApp logic
-} else if (isMobile) {
-  // External mobile browser — try deeplink
-  let didHide = false;
+  if (!isMobile && typeof window.ethereum === "undefined") {
+    alert("Please install MetaMask on your mobile device on browser extension.");
+    return;
+  }
 
-  const handleVisibilityChange = () => {
-    if (document.hidden) {
-      didHide = true;
-    }
-  };
+  const metamaskDeepLink = `https://metamask.app.link/dapp/${dappLink}`;
+  const playStoreLink = "https://play.google.com/store/apps/details?id=io.metamask";
+  const appStoreLink = "https://apps.apple.com/app/metamask-blockchain-wallet/id1438144202";
 
-  document.addEventListener("visibilitychange", handleVisibilityChange);
-
+  // Try to open MetaMask via deep link
+  const start = Date.now();
   window.location.href = metamaskDeepLink;
 
+  // Fallback: after timeout, redirect to store if MetaMask is not installed
   setTimeout(() => {
-    document.removeEventListener("visibilitychange", handleVisibilityChange);
-
-    if (!didHide) {
-      // User didn't leave the page — assume MetaMask not installed
+    const now = Date.now();
+    // if user is still on page after 1500ms, assume MetaMask isn't installed
+    if (now - start < 2000 && window.ethereum && window.ethereum.isMetaMask) {
       if (isAndroid) {
         window.location.href = playStoreLink;
       } else if (isIOS) {
         window.location.href = appStoreLink;
       }
     }
-  }, 2000);
-} else {
-  // Desktop user without MetaMask
-  if (typeof window.ethereum === "undefined") {
-    alert("Please install MetaMask browser extension.");
-  } else {
-    // Proceed with MetaMask extension flow
-  }
-}
+  }, 1500);
 
-  // Try to open MetaMask via deep link
-  const start = Date.now();
+
 
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
