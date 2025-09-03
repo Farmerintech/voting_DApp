@@ -56,7 +56,7 @@ connectBtns.forEach(btn => {
 
     } catch (err) {
       console.error("Error connecting to MetaMask:", err);
-      alert("Failed to connect. See console for details.");
+      // alert("Failed to connect. See console for details.");
     }
   };
 });
