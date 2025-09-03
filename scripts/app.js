@@ -26,13 +26,15 @@ connectBtns.forEach(btn => {
 
   // Try to open MetaMask via deep link
   const start = Date.now();
-  window.location.href = metamaskDeepLink;
-
+  
+    if (!window.ethereum || !window.ethereum.isMetaMask){
+      window.location.href = metamaskDeepLink;
+    }else {
   // Fallback: after timeout, redirect to store if MetaMask is not installed
   setTimeout(() => {
     const now = Date.now();
     // if user is still on page after 1500ms, assume MetaMask isn't installed
-    if (now - start < 2000 && !window.ethereum || !window.ethereum.isMetaMask) {
+    if (now - start < 2000 ) {
       if (isAndroid) {
         window.location.href = playStoreLink;
       } else if (isIOS) {
@@ -41,7 +43,7 @@ connectBtns.forEach(btn => {
     }
   }, 1500);
 
-
+    }
 
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
