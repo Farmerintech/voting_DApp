@@ -140,7 +140,7 @@ const vote = async (id) =>{
   }
 }
   document.addEventListener("DOMContentLoaded", function () {
-    const text = "Welcome to web 3 Voting system";
+    const text = "Welcome to web3 Voting system";
     const typingSpeed = 100; // milliseconds per character
     const element = document.getElementById("typing-text");
     let i = 0;
