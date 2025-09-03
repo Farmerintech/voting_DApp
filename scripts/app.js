@@ -26,7 +26,8 @@ connectBtns.forEach(btn => {
     }
 
     if (isMobile) {
-      window.location.href = "metamask://https://voting-d-app-pearl.vercel.app/";
+      window.location.href = "https://metamask.app.link/dapp/voting-d-app-pearl.vercel.app";
+
  }
 
     try {
@@ -138,3 +139,19 @@ const vote = async (id) =>{
     alert("You have already voted.");
   }
 }
+  document.addEventListener("DOMContentLoaded", function () {
+    const text = "Welcome to web 3 Voting system";
+    const typingSpeed = 100; // milliseconds per character
+    const element = document.getElementById("typing-text");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, typingSpeed);
+      }
+    }
+
+    typeWriter();
+  });

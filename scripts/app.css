@@ -187,6 +187,9 @@ header button{
     padding: 8px 16px;
     font-size: 0.9rem;
 }
+button{
+  width:60%;
+}
 nav{
     width:98%;
     padding: 5px;
