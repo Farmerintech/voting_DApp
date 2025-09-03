@@ -28,12 +28,8 @@ connectBtns.forEach(btn => {
     }
 
     if (isMobile) {
-      // Try to open MetaMask app using deep link (this may prompt user to open MetaMask)
       window.location.href = "metamask://https://voting-d-app-pearl.vercel.app/";
-
-      // After opening the app, you might want to wait a bit and then try connecting
-      // But since you can't be sure if user came back, just proceed to connect below
-    }
+ }
 
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -42,7 +38,7 @@ connectBtns.forEach(btn => {
       const addr = await signer.getAddress();
       const shortAddr = addr.slice(0, 6) + '...' + addr.slice(-4);
       document.getElementById("walletAddress").innerText = "Connected: " + addr;
-      btn.innerHTML = "Connected: " + shortAddr
+      connectBtns.forEach(b => b.innerText = "Connected: " + shortAddr);
 
       contract = new ethers.Contract(contractAddress, contractABI, signer);
 
@@ -89,9 +85,9 @@ container.classList.add(
 );
 
 // ✅ Add Close Button
-const closeButton = document.createElement("button");
+const closeButton = document.createElement("div");
 closeButton.textContent = "Close ✖";
-closeButton.className = "absolute top-4 w-[50px] right-4 text-white bg-pink-700 hover:bg-pink-800 px-4 py-2 rounded-md z-50";
+closeButton.className = "close absolute top-4 w-[full] right-4 text-white bg-pink-700 hover:bg-pink-800 px-4 py-2 rounded-md z-50";
 closeButton.onclick = () => {
   // container.innerHTML = "";
   container.style.display = "none"; // Hide container when closed
