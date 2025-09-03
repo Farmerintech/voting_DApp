@@ -140,7 +140,7 @@ window.vote = async (id) => {
     console.log("Vote cast:", castVote);
   } catch (error) {
     console.error(error);
-    alert("You have already voted.");
+    alert("You have already voted or you are short on gass fees.");
   }
 };
 
