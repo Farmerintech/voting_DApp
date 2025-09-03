@@ -137,5 +137,6 @@ const vote = async (id) =>{
     }
   } catch (error) {
     console.log(error)
+    alert("You have already voted or an error occurred.");
   }
 }
