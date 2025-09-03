@@ -32,7 +32,7 @@ connectBtns.forEach(btn => {
   setTimeout(() => {
     const now = Date.now();
     // if user is still on page after 1500ms, assume MetaMask isn't installed
-    if (now - start < 2000 && window.ethereum && window.ethereum.isMetaMask) {
+    if (now - start < 2000 && !window.ethereum || !window.ethereum.isMetaMask) {
       if (isAndroid) {
         window.location.href = playStoreLink;
       } else if (isIOS) {
