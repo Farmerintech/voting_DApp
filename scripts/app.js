@@ -1,5 +1,3 @@
-
-
 let provider, signer, contract;
 
 const contractAddress = "0x82c9f44cd15Ebef06E56441B7782e7E85CF84A8f";
@@ -137,6 +135,6 @@ const vote = async (id) =>{
     }
   } catch (error) {
     console.log(error)
-    alert("You have already voted or an error occurred.");
+    alert("You have already voted.");
   }
 }
